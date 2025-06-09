@@ -23,6 +23,9 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="APP_ROUTE_NAMES.PRODUCT_LIST">Products</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="APP_ROUTE_NAMES.ADD_PRODUCT">Add Products</router-link>
+          </li>
         </ul>
         <ul class="d-flex navbar-nav">
           <li class="nav-item dropdown">
@@ -48,11 +51,14 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li v-if="!authStore.isAuthenticated" class="nav-item">
             <router-link class="nav-link" :to="APP_ROUTE_NAMES.LOGIN">Login</router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!authStore.isAuthenticated" class="nav-item">
             <router-link class="nav-link" :to="APP_ROUTE_NAMES.SIGNUP">Register</router-link>
+          </li>
+          <li v-if="authStore.isAuthenticated" class="nav-item">
+           <button @click="[authStore.signOutUser(), router.push(APP_ROUTE_NAMES.LOGIN)]" class="nav-link" >Logout</button>
           </li>
         </ul>
       </div>
@@ -61,10 +67,11 @@
 </template>
 <script setup>
 import { APP_ROUTE_NAMES } from '@/constants/routeNames'
+import { userAuthStore } from '@/stores/authStore'
 import { useThemeStore } from '@/stores/themeStore'
-import { useRoute, RouterLink } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
 
-const router = useRoute()
-console.log('router is ', router)
+const router = useRouter();
+const authStore = userAuthStore();
 const themeStore = useThemeStore()
 </script>

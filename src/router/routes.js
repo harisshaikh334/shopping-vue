@@ -8,6 +8,7 @@ import ContactUs from '@/views/home/ContactUs.vue'
 import ProductList from '@/views/product/ProductList.vue'
 import ProductDetail from '@/views/product/ProductDetail.vue'
 import { APP_ROUTE_NAMES } from '@/constants/routeNames'
+import AddProduct from '@/views/product/AddProduct.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,16 @@ const router = createRouter({
       path: '/access-denied',
       name: APP_ROUTE_NAMES.ACCESS_DENIED,
       component: AccessDenied,
+    },
+    {
+      path: '/add-product',
+      name: APP_ROUTE_NAMES.ADD_PRODUCT,
+      component: AddProduct,
+    },
+    {
+      path: '/edit-product/:id',
+      name: APP_ROUTE_NAMES.EDIt_PRODUCT,
+      component: AddProduct,
     },
     {
       path: '/product-list',
